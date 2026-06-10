@@ -1,4 +1,4 @@
-cat > /mnt/user-data/outputs/devnova.html << 'HTMLEOF'
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -28,7 +28,7 @@ cat > /mnt/user-data/outputs/devnova.html << 'HTMLEOF'
   }
 
   /* ══════════════════════════════════════════
-     AURORA BACKGROUND — nebula + depth layers
+      AURORA BACKGROUND — nebula + depth layers
   ══════════════════════════════════════════ */
   .aurora-bg {
     position: fixed;
@@ -91,7 +91,7 @@ cat > /mnt/user-data/outputs/devnova.html << 'HTMLEOF'
 
   @keyframes starTwinkle {
     0%,100% { opacity: 0.15; transform: scale(1); }
-    50%     { opacity: 1;    transform: scale(1.4); }
+    50%      { opacity: 1;    transform: scale(1.4); }
   }
 
   /* ══ GRID BG ══ */
@@ -271,7 +271,7 @@ cat > /mnt/user-data/outputs/devnova.html << 'HTMLEOF'
   }
   @keyframes heroGlowPulse {
     0%,100% { opacity: .8; transform: translate(-50%,-55%) scale(1); }
-    50%     { opacity: 1;  transform: translate(-50%,-55%) scale(1.06); }
+    50%      { opacity: 1;  transform: translate(-50%,-55%) scale(1.06); }
   }
 
   .hero-logo-big {
@@ -487,7 +487,7 @@ cat > /mnt/user-data/outputs/devnova.html << 'HTMLEOF'
     position: relative;
     overflow: hidden;
     transition: all 0.35s;
-    cursor: default;
+    cursor: pointer;
     backdrop-filter: blur(10px);
   }
   /* Glass glare */
@@ -706,10 +706,6 @@ cat > /mnt/user-data/outputs/devnova.html << 'HTMLEOF'
     font-size: 11px;
     color: rgba(180,200,235,0.25);
   }
-  footer::before {
-    /* subtle top glow */
-    content: '';
-  }
   .footer-logo {
     font-family: 'Orbitron', sans-serif;
     font-size: 13px;
@@ -837,6 +833,30 @@ cat > /mnt/user-data/outputs/devnova.html << 'HTMLEOF'
   .modal-note { font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; line-height: 1.65; }
   .modal-note span { color: var(--neon-blue); }
 
+  /* تنسيقات نافذة تفاصيل الخدمة الجديدة */
+  .service-detail-content {
+    font-size: 14px;
+    color: rgba(180,200,235,0.8);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+  .service-detail-features {
+    list-style: none;
+    margin-top: 15px;
+  }
+  .service-detail-features li {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 8px;
+    font-size: 13px;
+    color: #e8f4ff;
+  }
+  .service-detail-features li::before {
+    content: '✦';
+    color: var(--neon-blue);
+  }
+
   /* ══ RESPONSIVE ══ */
   @media (max-width: 600px) {
     .stats-strip { grid-template-columns: repeat(2, 1fr); }
@@ -855,7 +875,6 @@ cat > /mnt/user-data/outputs/devnova.html << 'HTMLEOF'
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
 
-  /* Stagger children */
   .reveal:nth-child(2) { transition-delay: 0.05s; }
   .reveal:nth-child(3) { transition-delay: 0.1s; }
 </style>
@@ -872,7 +891,6 @@ cat > /mnt/user-data/outputs/devnova.html << 'HTMLEOF'
 <div class="orb orb-3"></div>
 <div class="particles" id="particles"></div>
 
-<!-- MODAL -->
 <div class="modal-overlay" id="contactModal">
   <div class="modal">
     <div class="modal-top-line"></div>
@@ -915,10 +933,31 @@ cat > /mnt/user-data/outputs/devnova.html << 'HTMLEOF'
   </div>
 </div>
 
-<!-- PAGE WRAPPER -->
+<div class="modal-overlay" id="serviceModal">
+  <div class="modal">
+    <div class="modal-top-line"></div>
+    <button class="modal-close" id="closeServiceModal">✕</button>
+    <div class="modal-logo">
+      <span id="modalServiceIcon" style="font-size: 30px; filter: drop-shadow(0 0 10px var(--neon-blue));">🌐</span>
+      <div class="modal-logo-name" id="modalServiceHeader" style="margin-right: 10px;">DEVNOVA SERVICE</div>
+    </div>
+    <div class="modal-title" id="modalServiceTitle">تطوير المواقع</div>
+    <div class="modal-sub" id="modalServiceSub">تفاصيل الخدمة والمميزات</div>
+    
+    <div class="service-detail-content" id="modalServiceDetail">
+      هنا تظهر المعلومات التفصيلية للخدمة...
+    </div>
+
+    <div class="modal-divider"><span class="modal-divider-text">TECH STACK / TOOLS</span></div>
+    <div class="service-tags" id="modalServiceTags" style="justify-content: center; margin-bottom: 20px;">
+    </div>
+    
+    <button class="cta-btn" id="modalServiceCTA" style="width: 100%; justify-content: center;">طلب هذه الخدمة الآن</button>
+  </div>
+</div>
+
 <div class="page-wrapper">
 
-  <!-- NAVBAR -->
   <nav>
     <div class="nav-logo">
       <svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
@@ -943,7 +982,6 @@ cat > /mnt/user-data/outputs/devnova.html << 'HTMLEOF'
     </div>
   </nav>
 
-  <!-- HERO -->
   <section class="hero">
     <div class="hero-glow"></div>
     <div class="hero-logo-big">
@@ -954,289 +992,331 @@ cat > /mnt/user-data/outputs/devnova.html << 'HTMLEOF'
             <stop offset="100%" stop-color="#a855f7"/>
           </linearGradient>
           <filter id="h-glow">
-            <feGaussianBlur stdDeviation="4" result="blur"/>
+            <feGaussianBlur stdDeviation="3" result="blur"/>
             <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
-          <linearGradient id="h-fill" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stop-color="rgba(0,212,255,0.07)"/>
-            <stop offset="100%" stop-color="rgba(168,85,247,0.07)"/>
-          </linearGradient>
         </defs>
-        <polygon points="60,6 108,33 108,87 60,114 12,87 12,33" fill="none" stroke="url(#h-hex-grad)" stroke-width="0.5" opacity="0.3"/>
-        <polygon points="60,12 103,36 103,84 60,108 17,84 17,36" fill="url(#h-fill)" stroke="url(#h-hex-grad)" stroke-width="2" filter="url(#h-glow)"/>
-        <text x="60" y="73" text-anchor="middle" font-family="Share Tech Mono, monospace" font-size="28" font-weight="700" fill="url(#h-hex-grad)">&lt;/&gt;</text>
+        <polygon points="60,6 108,33 108,87 60,114 12,87 12,33" fill="rgba(2,8,20,0.95)" stroke="url(#h-hex-grad)" stroke-width="3" filter="url(#h-glow)"/>
+        <text x="60" y="72" text-anchor="middle" font-family="Share Tech Mono, monospace" font-size="24" font-weight="700" fill="url(#h-hex-grad)">&lt;/&gt;</text>
       </svg>
     </div>
 
-    <div class="hero-eyebrow">⬡ Digital Solutions Pro</div>
+    <div class="hero-eyebrow">Full-Stack Developer</div>
     <h1 class="hero-title">
-      <span class="word-white">مطور مواقع</span><br>
-      <span class="word-grad">وتطبيقات</span>
+      <span class="word-white">نصنع مـسـتـقـبـل</span><br>
+      <span class="word-grad">الويب الذكي</span>
     </h1>
-    <p class="hero-sub">حلول رقمية احترافية تنمّي مشروعك وتحوّل أفكارك إلى واقع رقمي متميّز — من الفكرة حتى الإطلاق</p>
-
+    <p class="hero-sub">تطوير مواقع وتطبيقات متكاملة بأحدث التقنيات البرمجية وأعلى معايير الأداء والأمان الفائق.</p>
+    
     <div class="hero-tags">
-      <span class="tag">Web Development</span>
-      <span class="tag">Mobile Apps</span>
       <span class="tag">UI/UX Design</span>
-      <span class="tag">SEO Optimization</span>
-      <span class="tag">E-Commerce</span>
-      <span class="tag">Full-Stack</span>
+      <span class="tag">Full-Stack Development</span>
+      <span class="tag">Mobile Apps</span>
+      <span class="tag">Cloud Architecture</span>
     </div>
 
-    <button class="cta-btn" id="openModal">
-      <span>تواصل معي الآن</span>
-      <span>←</span>
-    </button>
+    <button class="cta-btn open-contact-btn">ابدأ مشروعك الآن ✦</button>
   </section>
 
-  <!-- STATS -->
   <div class="stats-strip reveal">
     <div class="stat-item">
-      <div class="stat-num" id="s1">0</div>
-      <div class="stat-label">مشروع منجز</div>
+      <div class="stat-num">+15</div>
+      <div class="stat-label">مشاريع مكتملة</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num" id="s2">0</div>
-      <div class="stat-label">عميل راضٍ</div>
+      <div class="stat-num">100%</div>
+      <div class="stat-label">رضا العملاء</div>
     </div>
     <div class="stat-item">
-      <div class="stat-num">5★</div>
-      <div class="stat-label">تقييم العملاء</div>
+      <div class="stat-num">+3</div>
+      <div class="stat-label">سنوات خبرة</div>
     </div>
     <div class="stat-item">
       <div class="stat-num">24/7</div>
-      <div class="stat-label">دعم فني</div>
+      <div class="stat-label">دعم فني متواصل</div>
     </div>
   </div>
 
-  <!-- SERVICES -->
   <section class="services reveal">
     <div class="section-header">
-      <div class="section-eyebrow">// SERVICES</div>
-      <h2 class="section-title">ماذا أقدم لك؟</h2>
+      <div class="section-eyebrow">WHAT I DO</div>
+      <h2 class="section-title">الخدمات الاحترافية</h2>
       <div class="section-line"></div>
     </div>
+
     <div class="services-grid">
-      <div class="service-card">
+      <div class="service-card" data-service="web">
         <span class="service-icon">🌐</span>
-        <div class="service-title">تطوير المواقع</div>
-        <div class="service-desc">مواقع سريعة وأنيقة وآمنة تعمل على جميع الأجهزة — من المواقع الشخصية إلى الشركات الكبرى</div>
-        <div class="service-tags"><span class="s-tag">HTML/CSS</span><span class="s-tag">React</span><span class="s-tag">WordPress</span></div>
+        <h3 class="service-title">تطوير المواقع الإلكترونية</h3>
+        <p class="service-desc">بناء مواقع سريعة ومتجاوبة مع كافة الشاشات باستخدام أحدث أطر العمل العالمية.</p>
+        <div class="service-tags">
+          <span class="s-tag">Vue.js</span>
+          <span class="s-tag">React</span>
+          <span class="s-tag">Next.js</span>
+        </div>
       </div>
-      <div class="service-card">
+
+      <div class="service-card" data-service="app">
         <span class="service-icon">📱</span>
-        <div class="service-title">تطبيقات الجوال</div>
-        <div class="service-desc">تطبيقات iOS وAndroid احترافية بتجربة مستخدم سلسة وأداء عالي يواكب متطلبات سوق اليوم</div>
-        <div class="service-tags"><span class="s-tag">React Native</span><span class="s-tag">Flutter</span><span class="s-tag">iOS/Android</span></div>
+        <h3 class="service-title">تطوير تطبيقات الهواتف</h3>
+        <p class="service-desc">برمجة تطبيقات أصلية وهجينة للأندرويد والـ iOS بأداء سلس وواجهات جذابة.</p>
+        <div class="service-tags">
+          <span class="s-tag">Flutter</span>
+          <span class="s-tag">Firebase</span>
+          <span class="s-tag">REST API</span>
+        </div>
       </div>
-      <div class="service-card">
-        <span class="service-icon">🛒</span>
-        <div class="service-title">المتاجر الإلكترونية</div>
-        <div class="service-desc">متجر إلكتروني متكامل مع بوابات دفع ونظام إدارة مخزون وتجربة شراء سهلة تزيد مبيعاتك</div>
-        <div class="service-tags"><span class="s-tag">Shopify</span><span class="s-tag">WooCommerce</span><span class="s-tag">Custom</span></div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🎨</span>
-        <div class="service-title">تصميم UI/UX</div>
-        <div class="service-desc">تصاميم عصرية تجذب الزوار وتحوّلهم إلى عملاء — تجربة مستخدم مدروسة وجمالية بصرية راقية</div>
-        <div class="service-tags"><span class="s-tag">Figma</span><span class="s-tag">Prototyping</span><span class="s-tag">Branding</span></div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">🔍</span>
-        <div class="service-title">تحسين محركات البحث</div>
-        <div class="service-desc">اجعل موقعك يتصدر نتائج Google وزد زياراتك العضوية بشكل حقيقي ومستدام</div>
-        <div class="service-tags"><span class="s-tag">SEO</span><span class="s-tag">Analytics</span><span class="s-tag">Performance</span></div>
-      </div>
-      <div class="service-card">
-        <span class="service-icon">⚙️</span>
-        <div class="service-title">الدعم والصيانة</div>
-        <div class="service-desc">دعم فني دائم وتحديثات منتظمة وحماية موقعك من المشاكل لضمان استمراريته دون انقطاع</div>
-        <div class="service-tags"><span class="s-tag">24/7 Support</span><span class="s-tag">Updates</span><span class="s-tag">Security</span></div>
+
+      <div class="service-card" data-service="backend">
+        <span class="service-icon">⚡</span>
+        <h3 class="service-title">برمجة الأنظمة الخلفية</h3>
+        <p class="service-desc">تطوير خوادم وقواعد بيانات متطورة آمنة تماماً وقابلة للتوسع لتتحمل ملايين الطلبات.</p>
+        <div class="service-tags">
+          <span class="s-tag">Node.js</span>
+          <span class="s-tag">Python</span>
+          <span class="s-tag">MongoDB</span>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- PROCESS -->
   <section class="process reveal">
     <div class="section-header">
-      <div class="section-eyebrow">// WORKFLOW</div>
-      <h2 class="section-title">كيف نعمل معاً؟</h2>
+      <div class="section-eyebrow">WORKFLOW</div>
+      <h2 class="section-title">آلية العمل وهندسة المشاريع</h2>
       <div class="section-line"></div>
     </div>
+
     <div class="process-steps">
       <div class="process-step">
         <div class="step-num">01</div>
         <div class="step-content">
-          <div class="step-title">التواصل والاستشارة</div>
-          <div class="step-desc">نتحدث عن مشروعك، نفهم أهدافك، وأحدد لك أفضل الحلول التقنية بجلسة استشارية مجانية</div>
+          <h3 class="step-title">التخطيط ودراسة المتطلبات</h3>
+          <p class="step-desc">جلسة استشارية لفهم فكرة المشروع وتحديد البنية التحتية البرمجية والجدول الزمني.</p>
         </div>
       </div>
       <div class="process-step">
         <div class="step-num">02</div>
         <div class="step-content">
-          <div class="step-title">التصميم والتخطيط</div>
-          <div class="step-desc">أصمم لك النماذج الأولية وهيكل المشروع بالكامل قبل الانطلاق في التطوير لضمان رضاك التام</div>
+          <h3 class="step-title">تصميم واجهات المستخدم (UI/UX)</h3>
+          <p class="step-desc">بناء تصاميم عصرية ونماذج أولية تفاعلية تركز على توفير أفضل تجربة للمستخدم.</p>
         </div>
       </div>
       <div class="process-step">
         <div class="step-num">03</div>
         <div class="step-content">
-          <div class="step-title">التطوير والبناء</div>
-          <div class="step-desc">أبني مشروعك بأحدث التقنيات مع تحديثات دورية تبقيك على اطلاع دائم بكل خطوة</div>
+          <h3 class="step-title">التطوير والبرمجة الفعلية</h3>
+          <p class="step-desc">تحويل التصاميم إلى أكواد نظيفة ومعيارية مع ربط الخوادم وقواعد البيانات باحترافية.</p>
         </div>
       </div>
       <div class="process-step">
         <div class="step-num">04</div>
         <div class="step-content">
-          <div class="step-title">الاختبار والإطلاق</div>
-          <div class="step-desc">اختبار شامل على جميع الأجهزة والمتصفحات قبل الإطلاق، ثم نطلق مشروعك بثقة واطمئنان</div>
+          <h3 class="step-title">الاختبار والإطلاق الرسمي</h3>
+          <p class="step-desc">فحص الأمان، سرعة الاستجابة، وحل المشكلات قبل رفع المشروع على الاستضافة النهائية.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TECH STACK -->
   <section class="tech reveal">
     <div class="section-header">
-      <div class="section-eyebrow">// TECH STACK</div>
-      <h2 class="section-title">التقنيات التي أتقنها</h2>
+      <div class="section-eyebrow">TECH STACK</div>
+      <h2 class="section-title">الترسانة التقنية</h2>
       <div class="section-line"></div>
     </div>
+
     <div class="tech-grid">
-      <div class="tech-item"><div class="tech-icon">⚛️</div><div class="tech-name">React</div></div>
-      <div class="tech-item"><div class="tech-icon">🟨</div><div class="tech-name">JavaScript</div></div>
-      <div class="tech-item"><div class="tech-icon">🐍</div><div class="tech-name">Python</div></div>
-      <div class="tech-item"><div class="tech-icon">🟦</div><div class="tech-name">TypeScript</div></div>
-      <div class="tech-item"><div class="tech-icon">🟢</div><div class="tech-name">Node.js</div></div>
-      <div class="tech-item"><div class="tech-icon">🎯</div><div class="tech-name">Flutter</div></div>
-      <div class="tech-item"><div class="tech-icon">🔷</div><div class="tech-name">React Native</div></div>
-      <div class="tech-item"><div class="tech-icon">🐬</div><div class="tech-name">MySQL</div></div>
-      <div class="tech-item"><div class="tech-icon">🍃</div><div class="tech-name">MongoDB</div></div>
-      <div class="tech-item"><div class="tech-icon">☁️</div><div class="tech-name">Cloud</div></div>
-      <div class="tech-item"><div class="tech-icon">🐙</div><div class="tech-name">Git/GitHub</div></div>
-      <div class="tech-item"><div class="tech-icon">🎨</div><div class="tech-name">Figma</div></div>
+      <div class="tech-item"><span class="tech-icon">HTML</span><span class="tech-name">HTML5</span></div>
+      <div class="tech-item"><span class="tech-icon">CSS</span><span class="tech-name">CSS3</span></div>
+      <div class="tech-item"><span class="tech-icon">JS</span><span class="tech-name">JavaScript</span></div>
+      <div class="tech-item"><span class="tech-icon">☢</span><span class="tech-name">React</span></div>
+      <div class="tech-item"><span class="tech-icon">🟢</span><span class="tech-name">Node.js</span></div>
+      <div class="tech-item"><span class="tech-icon">🐍</span><span class="tech-name">Python</span></div>
+      <div class="tech-item"><span class="tech-icon">🍃</span><span class="tech-name">MongoDB</span></div>
+      <div class="tech-item"><span class="tech-icon">🐙</span><span class="tech-name">Git/GitHub</span></div>
     </div>
   </section>
 
-  <!-- WHY ME -->
   <section class="why reveal">
     <div class="section-header">
-      <div class="section-eyebrow">// WHY DEVNOVA</div>
-      <h2 class="section-title">لماذا تختارني؟</h2>
+      <div class="section-eyebrow">WHY ME</div>
+      <h2 class="section-title">لماذا تختار DevNova؟</h2>
       <div class="section-line"></div>
     </div>
+
     <div class="why-grid">
       <div class="why-card">
-        <div class="why-icon-wrap">⚡</div>
-        <div><div class="why-text-title">تسليم سريع</div><div class="why-text-desc">أحترم وقتك وأسلّم مشروعك في الموعد المحدد دون تأخير</div></div>
+        <div class="why-icon-wrap">🚀</div>
+        <div>
+          <h4 class="why-text-title">سرعة فائقة بالأداء</h4>
+          <p class="why-text-desc">تطوير يعتمد على تحسين الأكواد وضغط الملفات لضمان أعلى سرعة تحميل ممكنة.</p>
+        </div>
       </div>
       <div class="why-card">
-        <div class="why-icon-wrap">💎</div>
-        <div><div class="why-text-title">جودة عالية</div><div class="why-text-desc">كود نظيف ومنظم وقابل للتطوير يضمن استدامة مشروعك</div></div>
+        <div class="why-icon-wrap">🛡️</div>
+        <div>
+          <h4 class="why-text-title">حماية وأمان فائق</h4>
+          <p class="why-text-desc">تطبيق أعلى معايير الأمان لحماية بياناتك وبيانات عملائك من أي ثغرات.</p>
+        </div>
       </div>
       <div class="why-card">
-        <div class="why-icon-wrap">🔒</div>
-        <div><div class="why-text-title">حماية وأمان</div><div class="why-text-desc">أمان من الدرجة الأولى لحماية بياناتك وبيانات عملائك</div></div>
-      </div>
-      <div class="why-card">
-        <div class="why-icon-wrap">📊</div>
-        <div><div class="why-text-title">أسعار منافسة</div><div class="why-text-desc">جودة احترافية بأسعار تناسب جميع الميزانيات والمشاريع</div></div>
-      </div>
-      <div class="why-card">
-        <div class="why-icon-wrap">🔄</div>
-        <div><div class="why-text-title">تعديلات مجانية</div><div class="why-text-desc">تعديلات مجانية بعد التسليم لضمان رضاك الكامل عن النتيجة</div></div>
-      </div>
-      <div class="why-card">
-        <div class="why-icon-wrap">🌍</div>
-        <div><div class="why-text-title">متعدد اللغات</div><div class="why-text-desc">مشاريع بالعربية والإنجليزية والفرنسية تصل لجمهور أوسع</div></div>
+        <div class="why-icon-wrap">🎨</div>
+        <div>
+          <h4 class="why-text-title">كود مخصص ونظيف</h4>
+          <p class="why-text-desc">أكواد مرتبة وموثقة بالكامل يسهل تعديلها وتطويرها مستقبلاً دون تعقيدات.</p>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER CTA -->
   <div class="footer-cta reveal">
-    <h2 class="footer-cta-title">مستعد لبدء مشروعك؟ 🚀</h2>
-    <p class="footer-cta-sub">لا تتردد في التواصل معي الآن — استشارة أولى مجانية ونبدأ رحلتك الرقمية معاً</p>
-    <button class="cta-btn" id="openModal2"><span>ابدأ مشروعك الآن</span><span>←</span></button>
+    <h3 class="footer-cta-title">هل لديك فكرة مشروع تود مناقشتها؟</h3>
+    <p class="footer-cta-sub">دعنا نتحاور حول أهدافك البرمجية ونصمم لك الحل الرقمي الأنسب لنمو أعمالك.</p>
+    <button class="cta-btn open-contact-btn">تواصل الآن ✦</button>
   </div>
 
-  <!-- FOOTER -->
   <footer>
     <div class="footer-logo">DEVNOVA</div>
-    <div>© 2025 DevNova · جميع الحقوق محفوظة</div>
+    <div>© 2026 جميع الحقوق محفوظة لـ DevNova.</div>
   </footer>
 
 </div>
 
 <script>
-  /* ── STAR FIELD ── */
-  const sf = document.getElementById('starfield');
-  for (let i = 0; i < 180; i++) {
-    const s = document.createElement('div');
-    s.className = 'star' + (i % 8 === 0 ? ' blue' : i % 12 === 0 ? ' purple' : '');
-    s.style.cssText = `
-      left:${Math.random()*100}%;
-      top:${Math.random()*100}%;
-      width:${0.5 + Math.random()*1.5}px;
-      height:${0.5 + Math.random()*1.5}px;
-      animation-duration:${2 + Math.random()*5}s;
-      animation-delay:${Math.random()*6}s;
-    `;
-    sf.appendChild(s);
+  // 1. GENERATE STARFIELD ANIMATION
+  const starfield = document.getElementById('starfield');
+  const starCount = 60;
+  const colors = ['white', 'blue', 'purple'];
+
+  for (let i = 0; i < starCount; i++) {
+    const star = document.createElement('div');
+    star.classList.add('star', colors[Math.floor(Math.random() * colors.length)]);
+    
+    // Random position and scales
+    star.style.top = Math.random() * 100 + 'vh';
+    star.style.left = Math.random() * 100 + 'vw';
+    const size = Math.random() * 2 + 1;
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    
+    // Random timing
+    star.style.animationDuration = (Math.random() * 4 + 3) + 's';
+    star.style.animationDelay = Math.random() * 5 + 's';
+    
+    starfield.appendChild(star);
   }
 
-  /* ── PARTICLES ── */
-  const pc = document.getElementById('particles');
-  for (let i = 0; i < 40; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    const drift = (Math.random() - 0.5) * 80;
-    p.style.cssText = `
-      left:${Math.random()*100}%;
-      bottom:0;
-      --drift:${drift}px;
-      animation-duration:${6 + Math.random()*10}s;
-      animation-delay:${Math.random()*10}s;
-      width:${1 + Math.random()*2}px;
-      height:${1 + Math.random()*2}px;
-    `;
-    pc.appendChild(p);
+  // 2. GENERATE FLOATING PARTICLES
+  const particlesContainer = document.getElementById('particles');
+  const particleCount = 25;
+
+  for (let i = 0; i < particleCount; i++) {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+    
+    particle.style.left = Math.random() * 100 + 'vw';
+    const size = Math.random() * 4 + 2;
+    particle.style.width = size + 'px';
+    particle.style.height = size + 'px';
+    
+    particle.style.animationDuration = (Math.random() * 12 + 8) + 's';
+    particle.style.animationDelay = Math.random() * 8 + 's';
+    particle.style.setProperty('--drift', (Math.random() * 60 - 30) + 'px');
+    
+    particlesContainer.appendChild(particle);
   }
 
-  /* ── MODAL ── */
-  const modal  = document.getElementById('contactModal');
-  const open1  = document.getElementById('openModal');
-  const open2  = document.getElementById('openModal2');
-  const close  = document.getElementById('closeModal');
-  const openM  = () => { modal.classList.add('active');    document.body.style.overflow = 'hidden'; };
-  const closeM = () => { modal.classList.remove('active'); document.body.style.overflow = '';       };
-  open1.addEventListener('click', openM);
-  open2.addEventListener('click', openM);
-  close.addEventListener('click', closeM);
-  modal.addEventListener('click', e => { if (e.target === modal) closeM(); });
-  document.addEventListener('keydown', e => { if (e.key === 'Escape') closeM(); });
+  // 3. MODALS LOGIC (Contact Modal)
+  const contactModal = document.getElementById('contactModal');
+  const closeModal = document.getElementById('closeModal');
+  const openContactBtns = document.querySelectorAll('.open-contact-btn');
 
-  /* ── COUNT-UP ── */
-  function countUp(el, target, prefix = '') {
-    let cur = 0; const step = target / 55;
-    const t = setInterval(() => {
-      cur += step;
-      if (cur >= target) { el.textContent = prefix + target; clearInterval(t); }
-      else { el.textContent = prefix + Math.floor(cur); }
-    }, 22);
-  }
-  setTimeout(() => {
-    countUp(document.getElementById('s1'), 50, '+');
-    countUp(document.getElementById('s2'), 30, '+');
-  }, 500);
+  openContactBtns.forEach(btn => {
+    btn.addEventListener('click', () => contactModal.classList.add('active'));
+  });
+  closeModal.addEventListener('click', () => contactModal.classList.remove('active'));
 
-  /* ── SCROLL REVEAL ── */
-  const reveals = document.querySelectorAll('.reveal');
-  const obs = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
-  }, { threshold: 0.1 });
-  reveals.forEach(r => obs.observe(r));
+  // 4. DYNAMIC SERVICES MODAL DATA
+  const serviceData = {
+    web: {
+      title: "تطوير المواقع الإلكترونية",
+      icon: "🌐",
+      desc: "نقدم حلول تطوير ويب متكاملة مخصصة لهوية أعمالك. نركز على سرعة التصفح، الأرشفة الذكية في محركات البحث (SEO)، والتوافق المطلق مع الهواتف الذكية والأجهزة اللوحية.",
+      features: ["واجهات مستخدم تفاعلية فائقة السرعة", "لوحة تحكم إدارية مخصصة وسهلة الاستخدام", "كود نظيف متوافق مع معايير الويب العالمية SEO", "دعم ميزة الأنظمة الذكية والأنماط المظلمة Dark Mode"],
+      tags: ["Vue.js", "React.js", "Next.js", "TailwindCSS", "WordPress API"]
+    },
+    app: {
+      title: "تطوير تطبيقات الهواتف",
+      icon: "📱",
+      desc: "تصميم وبرمجة تطبيقات الهواتف لنظامي Android و iOS باستخدام كود برمجي موحد ومستقر يضمن السرعة والكفاءة العالية وتقليل تكلفة التطوير.",
+      features: ["واجهات وتجربة مستخدم مذهلة وسلسة", "ربط مباشر مع الحساسات الداخلية (GPS, Camera)", "نظام إشعارات دفعي متطور للعملاء Push Notifications", "العمل دون اتصال بالإنترنت Offline Caching"],
+      tags: ["Flutter", "Dart", "Firebase", "App Store / Play Store", "SQLite"]
+    },
+    backend: {
+      title: "برمجة الأنظمة والـ APIs",
+      icon: "⚡",
+      desc: "بناء المحركات الخلفية التي تدير بيانات مشروعك بكل أمان واستقرار. نضمن لك معمارية برمجية صلبة تتحمل الضغط العالي وتدفق البيانات الضخم بمرونة تامة.",
+      features: ["بناء واجهات برمجية RESTful / GraphQL آمنة وسريعة", "حماية قواعد البيانات وتشفير كلمات المرور والبيانات الحساسة", "تكامل ذكي مع بوابات الدفع الإلكتروني (Stripe, PayPal)", "أنظمة مراقبة وتحليل أداء الخوادم الفورية"],
+      tags: ["Node.js", "Express", "Python Django", "MongoDB", "PostgreSQL", "JWT Authentication"]
+    }
+  };
+
+  const serviceModal = document.getElementById('serviceModal');
+  const closeServiceModal = document.getElementById('closeServiceModal');
+  const serviceCards = document.querySelectorAll('.service-card');
+
+  serviceCards.forEach(card => {
+    card.addEventListener('click', () => {
+      const type = card.getAttribute('data-service');
+      const data = serviceData[type];
+      
+      if (data) {
+        document.getElementById('modalServiceIcon').innerText = data.icon;
+        document.getElementById('modalServiceTitle').innerText = data.title;
+        
+        let htmlContent = `<p>${data.desc}</p><ul class="service-detail-features">`;
+        data.features.forEach(f => { htmlContent += `<li>${f}</li>`; });
+        htmlContent += `</ul>`;
+        document.getElementById('modalServiceDetail').innerHTML = htmlContent;
+
+        let tagsContent = '';
+        data.tags.forEach(t => { tagsContent += `<span class="s-tag">${t}</span>`; });
+        document.getElementById('modalServiceTags').innerHTML = tagsContent;
+
+        serviceModal.classList.add('active');
+      }
+    });
+  });
+
+  closeServiceModal.addEventListener('click', () => serviceModal.classList.remove('active'));
+
+  // Close modals when clicking outside the content box
+  window.addEventListener('click', (e) => {
+    if (e.target === contactModal) contactModal.classList.remove('active');
+    if (e.target === serviceModal) serviceModal.classList.remove('active');
+  });
+
+  document.getElementById('modalServiceCTA').addEventListener('click', () => {
+    serviceModal.classList.remove('active');
+    contactModal.classList.add('active');
+  });
+
+  // 5. SCROLL REVEAL EFFECT
+  const revealElements = document.querySelectorAll('.reveal');
+  const checkReveal = () => {
+    const triggerBottom = window.innerHeight * 0.85;
+    revealElements.forEach(el => {
+      const elTop = el.getBoundingClientRect().top;
+      if (elTop < triggerBottom) {
+        el.classList.add('visible');
+      }
+    });
+  };
+
+  window.addEventListener('scroll', checkReveal);
+  window.addEventListener('load', checkReveal); // Run once on load
 </script>
+
 </body>
 </html>
