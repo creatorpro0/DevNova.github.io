@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>DevNova | مطور مواقع وتطبيقات</title>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;900&family=Share+Tech+Mono&family=Orbitron:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
@@ -17,14 +16,27 @@
     --glow-purple: rgba(168, 85, 247, 0.4);
   }
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
-  html { scroll-behavior: smooth; }
+  * { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent;
+  }
+  
+  html { 
+    scroll-behavior: smooth; 
+    width: 100%;
+    overflow-x: hidden;
+  }
 
   body {
     background: #030508;
     font-family: 'Cairo', sans-serif;
     color: #fff;
+    width: 100%;
     overflow-x: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
   }
 
   /* ══════════════════════════════════════════
@@ -36,9 +48,9 @@
     z-index: 0;
     overflow: hidden;
     pointer-events: none;
+    user-select: none;
   }
 
-  /* Deep space base */
   .aurora-bg::before {
     content: '';
     position: absolute;
@@ -52,7 +64,6 @@
     animation: auroraDrift 18s ease-in-out infinite alternate;
   }
 
-  /* Nebula mid-layer */
   .aurora-bg::after {
     content: '';
     position: absolute;
@@ -193,6 +204,7 @@
     max-width: 900px;
     margin: 0 auto;
     padding: 0 20px 40px;
+    width: 100%;
   }
 
   /* ══ NAVBAR ══ */
@@ -203,6 +215,7 @@
     padding: 22px 0 18px;
     border-bottom: 1px solid rgba(0,212,255,0.08);
     position: relative;
+    width: 100%;
   }
   nav::after {
     content: '';
@@ -213,7 +226,7 @@
     filter: blur(1px);
   }
   .nav-logo { display: flex; align-items: center; gap: 10px; }
-  .nav-logo svg { width: 40px; height: 40px; }
+  .nav-logo svg { width: 40px; height: 40px; flex-shrink: 0; }
   .nav-logo-text {
     font-family: 'Orbitron', sans-serif;
     font-size: 18px;
@@ -239,6 +252,7 @@
     text-transform: uppercase;
     backdrop-filter: blur(8px);
     box-shadow: inset 0 1px 0 rgba(0,212,255,0.1), 0 0 12px rgba(0,212,255,0.06);
+    flex-shrink: 0;
   }
   .badge-dot {
     width: 6px; height: 6px;
@@ -246,6 +260,7 @@
     border-radius: 50%;
     box-shadow: 0 0 8px #00ff88;
     animation: pulse 2s infinite;
+    flex-shrink: 0;
   }
   @keyframes pulse { 0%,100%{box-shadow:0 0 4px #00ff88} 50%{box-shadow:0 0 14px #00ff88,0 0 28px rgba(0,255,136,0.4)} }
 
@@ -255,12 +270,14 @@
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 70px 20px 55px;
+    padding: 70px 10px 55px;
     position: relative;
+    width: 100%;
+    overflow: hidden;
   }
   .hero-glow {
     position: absolute;
-    width: 600px; height: 600px;
+    width: 500px; height: 500px;
     background:
       radial-gradient(circle at 50% 40%, rgba(168,85,247,0.1) 0%, transparent 50%),
       radial-gradient(circle at 30% 60%, rgba(0,212,255,0.06) 0%, transparent 50%);
@@ -268,10 +285,11 @@
     transform: translate(-50%, -55%);
     pointer-events: none;
     animation: heroGlowPulse 6s ease-in-out infinite;
+    z-index: 0;
   }
   @keyframes heroGlowPulse {
     0%,100% { opacity: .8; transform: translate(-50%,-55%) scale(1); }
-    50%      { opacity: 1;  transform: translate(-50%,-55%) scale(1.06); }
+    50%      { opacity: 1;  transform: translate(-50%,-55%) scale(1.04); }
   }
 
   .hero-logo-big {
@@ -288,17 +306,18 @@
     font-size: 10px;
     font-weight: 700;
     color: rgba(168,85,247,0.75);
-    letter-spacing: 6px;
+    letter-spacing: 5px;
     text-transform: uppercase;
     margin-bottom: 18px;
     position: relative; z-index: 1;
   }
   .hero-title {
-    font-size: clamp(38px, 7vw, 66px);
+    font-size: clamp(30px, 6vw, 60px);
     font-weight: 900;
-    line-height: 1.06;
+    line-height: 1.3;
     margin-bottom: 22px;
     position: relative; z-index: 1;
+    width: 100%;
   }
   .hero-title .word-white { color: #e8f4ff; }
   .hero-title .word-grad {
@@ -312,9 +331,10 @@
     font-size: 15px;
     color: rgba(200,220,255,0.55);
     max-width: 480px;
-    line-height: 1.9;
+    line-height: 1.8;
     margin-bottom: 36px;
     position: relative; z-index: 1;
+    width: 100%;
   }
   .hero-tags {
     display: flex;
@@ -323,6 +343,7 @@
     justify-content: center;
     margin-bottom: 38px;
     position: relative; z-index: 1;
+    width: 100%;
   }
   .tag {
     font-family: 'Share Tech Mono', monospace;
@@ -405,6 +426,7 @@
       0 0 0 1px rgba(0,212,255,0.04),
       0 20px 60px rgba(0,0,0,0.4),
       inset 0 1px 0 rgba(0,212,255,0.1);
+    width: 100%;
   }
   .stat-item {
     display: flex;
@@ -415,6 +437,7 @@
     gap: 5px;
     transition: background 0.3s;
     position: relative;
+    height: auto;
   }
   .stat-item::before {
     content: '';
@@ -449,6 +472,7 @@
     align-items: center;
     text-align: center;
     margin-bottom: 40px;
+    width: 100%;
   }
   .section-eyebrow {
     font-family: 'Share Tech Mono', monospace;
@@ -473,11 +497,12 @@
   }
 
   /* ══ SERVICES ══ */
-  .services { margin-bottom: 70px; }
+  .services { margin-bottom: 70px; width: 100%; }
   .services-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 14px;
+    width: 100%;
   }
   .service-card {
     background: linear-gradient(145deg, rgba(3,8,22,0.9), rgba(6,4,18,0.95));
@@ -489,8 +514,8 @@
     transition: all 0.35s;
     cursor: pointer;
     backdrop-filter: blur(10px);
+    height: auto;
   }
-  /* Glass glare */
   .service-card::after {
     content: '';
     position: absolute;
@@ -540,8 +565,8 @@
   }
 
   /* ══ PROCESS ══ */
-  .process { margin-bottom: 70px; }
-  .process-steps { display: flex; flex-direction: column; gap: 0; position: relative; }
+  .process { margin-bottom: 70px; width: 100%; }
+  .process-steps { display: flex; flex-direction: column; gap: 0; position: relative; width: 100%; }
   .process-steps::before {
     content: '';
     position: absolute;
@@ -555,7 +580,7 @@
       rgba(0,212,255,0.2) 90%,
       transparent 100%);
   }
-  .process-step { display: flex; align-items: flex-start; gap: 22px; padding: 26px 0; position: relative; }
+  .process-step { display: flex; align-items: flex-start; gap: 22px; padding: 26px 0; position: relative; width: 100%; height: auto; }
   .step-num {
     flex-shrink: 0;
     width: 54px; height: 54px;
@@ -582,11 +607,12 @@
   .step-desc { font-size: 13px; color: rgba(180,200,235,0.45); line-height: 1.75; }
 
   /* ══ TECH STACK ══ */
-  .tech { margin-bottom: 70px; }
+  .tech { margin-bottom: 70px; width: 100%; }
   .tech-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
     gap: 10px;
+    width: 100%;
   }
   .tech-item {
     background: linear-gradient(145deg, rgba(3,8,22,0.9), rgba(6,3,18,0.95));
@@ -602,6 +628,7 @@
     backdrop-filter: blur(8px);
     position: relative;
     overflow: hidden;
+    height: auto;
   }
   .tech-item::before {
     content: '';
@@ -617,11 +644,12 @@
   .tech-name { font-family: 'Share Tech Mono', monospace; font-size: 10px; color: rgba(0,212,255,0.6); letter-spacing: 0.5px; text-align: center; }
 
   /* ══ WHY ME ══ */
-  .why { margin-bottom: 70px; }
+  .why { margin-bottom: 70px; width: 100%; }
   .why-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 12px;
+    width: 100%;
   }
   .why-card {
     background: linear-gradient(145deg, rgba(3,6,18,0.88), rgba(8,4,20,0.92));
@@ -635,6 +663,7 @@
     backdrop-filter: blur(8px);
     position: relative;
     overflow: hidden;
+    height: auto;
   }
   .why-card::before {
     content: '';
@@ -667,12 +696,13 @@
     background: linear-gradient(135deg, rgba(3,8,22,0.92), rgba(8,3,22,0.95));
     border: 1px solid rgba(0,212,255,0.1);
     border-radius: 18px;
-    padding: 55px 30px;
+    padding: 55px 20px;
     position: relative;
     overflow: hidden;
     margin-bottom: 30px;
     backdrop-filter: blur(12px);
     box-shadow: 0 20px 60px rgba(0,0,0,0.4), inset 0 1px 0 rgba(0,212,255,0.08);
+    width: 100%;
   }
   .footer-cta::before {
     content: '';
@@ -690,7 +720,7 @@
       radial-gradient(ellipse 40% 40% at 20% 100%, rgba(0,212,255,0.04) 0%, transparent 70%);
     pointer-events: none;
   }
-  .footer-cta-title { font-size: clamp(22px, 4vw, 32px); font-weight: 900; margin-bottom: 12px; color: #e8f4ff; position: relative; z-index: 1; }
+  .footer-cta-title { font-size: clamp(20px, 4vw, 32px); font-weight: 900; margin-bottom: 12px; color: #e8f4ff; position: relative; z-index: 1; line-height: 1.4; }
   .footer-cta-sub { font-size: 14px; color: rgba(180,200,235,0.45); margin-bottom: 30px; line-height: 1.8; position: relative; z-index: 1; }
   .footer-cta .cta-btn { position: relative; z-index: 1; }
 
@@ -700,11 +730,12 @@
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 15px;
     padding: 20px 0;
     border-top: 1px solid rgba(0,212,255,0.06);
     font-size: 11px;
     color: rgba(180,200,235,0.25);
+    width: 100%;
   }
   .footer-logo {
     font-family: 'Orbitron', sans-serif;
@@ -721,13 +752,13 @@
   .modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0,0,0,0.85);
     backdrop-filter: blur(10px);
     z-index: 1000;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 20px;
+    padding: 16px;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s;
@@ -738,17 +769,18 @@
     background: linear-gradient(145deg, #04091a 0%, #070318 100%);
     border: 1px solid rgba(0,212,255,0.25);
     border-radius: 18px;
-    padding: 42px 38px;
+    padding: 40px 24px 30px;
     width: 100%;
-    max-width: 460px;
+    max-width: 440px;
     position: relative;
-    transform: translateY(24px) scale(0.96);
-    transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform: translateY(20px) scale(0.96);
+    transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1);
     box-shadow:
       0 0 0 1px rgba(0,212,255,0.06),
-      0 0 60px rgba(0,212,255,0.12),
-      0 0 120px rgba(168,85,247,0.06),
+      0 0 40px rgba(0,212,255,0.12),
       0 40px 80px rgba(0,0,0,0.6);
+    max-height: 90vh;
+    overflow-y: auto;
   }
   .modal-overlay.active .modal { transform: translateY(0) scale(1); }
 
@@ -758,12 +790,11 @@
     height: 1px;
     background: linear-gradient(90deg, transparent, var(--neon-blue) 30%, var(--neon-purple) 70%, transparent);
     border-radius: 18px 18px 0 0;
-    box-shadow: 0 0 12px rgba(0,212,255,0.4);
   }
   .modal-close {
     position: absolute;
     top: 14px; left: 14px;
-    width: 30px; height: 30px;
+    width: 32px; height: 32px;
     background: rgba(0,212,255,0.06);
     border: 1px solid rgba(0,212,255,0.15);
     border-radius: 50%;
@@ -775,9 +806,9 @@
     cursor: pointer;
     transition: all 0.2s;
   }
-  .modal-close:hover { background: rgba(0,212,255,0.15); color: #fff; border-color: rgba(0,212,255,0.4); }
+  .modal-close:hover { background: rgba(0,212,255,0.15); color: #fff; }
 
-  .modal-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 26px; }
+  .modal-logo { display: flex; align-items: center; gap: 10px; margin-bottom: 20px; }
   .modal-logo svg { width: 36px; height: 36px; }
   .modal-logo-name {
     font-family: 'Orbitron', sans-serif;
@@ -790,30 +821,28 @@
     letter-spacing: 3px;
   }
 
-  .modal-title { font-size: 22px; font-weight: 900; color: #e8f4ff; margin-bottom: 6px; }
-  .modal-sub { font-size: 13px; color: rgba(180,200,235,0.45); margin-bottom: 30px; line-height: 1.65; }
+  .modal-title { font-size: 20px; font-weight: 900; color: #e8f4ff; margin-bottom: 6px; }
+  .modal-sub { font-size: 13px; color: rgba(180,200,235,0.45); margin-bottom: 24px; line-height: 1.6; }
 
   .contact-item {
     display: flex;
     align-items: center;
     gap: 14px;
-    padding: 16px 18px;
+    padding: 14px 16px;
     background: rgba(0,212,255,0.03);
     border: 1px solid rgba(0,212,255,0.1);
     border-radius: 12px;
     margin-bottom: 10px;
-    transition: all 0.3s;
+    transition: all 0.25s;
     cursor: pointer;
     text-decoration: none;
   }
   .contact-item:hover {
     background: rgba(0,212,255,0.08);
     border-color: rgba(0,212,255,0.35);
-    transform: translateX(-3px);
-    box-shadow: 0 4px 16px rgba(0,212,255,0.08);
   }
   .contact-icon-wrap {
-    width: 42px; height: 42px;
+    width: 40px; height: 40px;
     flex-shrink: 0;
     background: rgba(0,212,255,0.06);
     border: 1px solid rgba(0,212,255,0.15);
@@ -821,62 +850,72 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 19px;
+    font-size: 18px;
   }
-  .contact-info-label { font-size: 10px; color: rgba(255,255,255,0.35); margin-bottom: 3px; font-family: 'Share Tech Mono', monospace; letter-spacing: 1.5px; }
+  .contact-info-label { font-size: 9px; color: rgba(255,255,255,0.35); margin-bottom: 2px; font-family: 'Share Tech Mono', monospace; letter-spacing: 1px; }
   .contact-info-value { font-size: 14px; color: #e8f4ff; font-weight: 600; direction: ltr; text-align: right; }
 
   .modal-divider { display: flex; align-items: center; gap: 12px; margin: 20px 0 16px; }
   .modal-divider::before, .modal-divider::after { content:''; flex:1; height:1px; background:rgba(0,212,255,0.08); }
-  .modal-divider-text { font-size: 10px; color: rgba(255,255,255,0.25); font-family: 'Share Tech Mono', monospace; letter-spacing: 2px; white-space: nowrap; }
+  .modal-divider-text { font-size: 9px; color: rgba(255,255,255,0.25); font-family: 'Share Tech Mono', monospace; letter-spacing: 1.5px; white-space: nowrap; }
 
-  .modal-note { font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; line-height: 1.65; }
+  .modal-note { font-size: 12px; color: rgba(255,255,255,0.3); text-align: center; line-height: 1.6; }
   .modal-note span { color: var(--neon-blue); }
 
-  /* تنسيقات نافذة تفاصيل الخدمة الجديدة */
-  .service-detail-content {
-    font-size: 14px;
-    color: rgba(180,200,235,0.8);
-    line-height: 1.8;
-    margin-bottom: 20px;
-  }
-  .service-detail-features {
-    list-style: none;
-    margin-top: 15px;
-  }
-  .service-detail-features li {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 8px;
-    font-size: 13px;
-    color: #e8f4ff;
-  }
-  .service-detail-features li::before {
-    content: '✦';
-    color: var(--neon-blue);
+  .service-detail-content { font-size: 14px; color: rgba(180,200,235,0.8); line-height: 1.8; margin-bottom: 20px; }
+  .service-detail-features { list-style: none; margin-top: 12px; }
+  .service-detail-features li { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; font-size: 13px; color: #e8f4ff; }
+  .service-detail-features li::before { content: '✦'; color: var(--neon-blue); flex-shrink: 0; }
+
+  /* ════════════════════════════════════════
+      RESPONSIVE HARDENING (تثبيت وضبط الشاشات)
+  ══════════════════════════════════════════ */
+  @media (max-width: 768px) {
+    .page-wrapper { padding: 0 16px 30px; }
+    nav { padding: 16px 0 14px; }
+    .hero { padding: 50px 0 40px; }
+    .hero-glow { width: 320px; height: 320px; }
+    .stats-strip { grid-template-columns: repeat(2, 1fr); }
+    .services-grid { grid-template-columns: 1fr; gap: 16px; }
+    .why-grid { grid-template-columns: 1fr; gap: 12px; }
+    .process-steps::before { right: 23px; }
+    .process-step { gap: 16px; padding: 20px 0; }
+    .step-num { width: 46px; height: 46px; font-size: 11px; }
+    .tech-grid { grid-template-columns: repeat(4, 1fr); }
   }
 
-  /* ══ RESPONSIVE ══ */
-  @media (max-width: 600px) {
-    .stats-strip { grid-template-columns: repeat(2, 1fr); }
-    .process-steps::before { right: 23px; }
-    .step-num { width: 46px; height: 46px; font-size: 11px; }
-    .modal { padding: 36px 18px 28px; }
-    footer { justify-content: center; text-align: center; }
-    nav { flex-wrap: wrap; gap: 10px; justify-content: center; }
+  @media (max-width: 480px) {
+    nav { flex-direction: column; gap: 14px; text-align: center; padding-bottom: 20px; }
+    .nav-badge { width: auto; align-self: center; }
+    .hero-title { font-size: 28px; line-height: 1.4; }
+    .hero-sub { font-size: 13px; line-height: 1.75; color: rgba(200,220,255,0.7); }
+    .stats-strip { grid-template-columns: 1fr; border-radius: 12px; }
+    .stat-item { padding: 18px 10px; }
+    .cta-btn { width: 100%; justify-content: center; padding: 14px 24px; font-size: 14px; }
+    
+    /* منع الانضغاط وتداخل الخطوات في الهواتف الصغيرة جداً */
+    .process-steps::before { display: none; }
+    .process-step { flex-direction: column; align-items: center; text-align: center; padding: 24px 12px; background: rgba(0,212,255,0.02); border: 1px solid rgba(0,212,255,0.05); border-radius: 12px; }
+    .step-content { padding-top: 10px; }
+    
+    .tech-grid { grid-template-columns: repeat(3, 1fr); }
+    .modal { padding: 35px 16px 24px; border-radius: 14px; }
+    .contact-item { padding: 12px; }
+    .contact-info-value { font-size: 13px; }
+    footer { flex-direction: column; text-align: center; gap: 12px; padding: 24px 0; }
+  }
+
+  @media (max-width: 360px) {
+    .tech-grid { grid-template-columns: repeat(2, 1fr); }
   }
 
   /* ══ SCROLL REVEAL ══ */
   .reveal {
     opacity: 0;
-    transform: translateY(28px);
-    transition: opacity 0.7s ease, transform 0.7s ease;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
   .reveal.visible { opacity: 1; transform: translateY(0); }
-
-  .reveal:nth-child(2) { transition-delay: 0.05s; }
-  .reveal:nth-child(3) { transition-delay: 0.1s; }
 </style>
 </head>
 <body>
@@ -902,12 +941,8 @@
             <stop offset="0%" stop-color="#00d4ff"/>
             <stop offset="100%" stop-color="#a855f7"/>
           </linearGradient>
-          <filter id="m-glow">
-            <feGaussianBlur stdDeviation="2" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
         </defs>
-        <polygon points="40,4 72,22 72,58 40,76 8,58 8,22" fill="rgba(2,8,20,0.95)" stroke="url(#m-hex-grad)" stroke-width="2.5" filter="url(#m-glow)"/>
+        <polygon points="40,4 72,22 72,58 40,76 8,58 8,22" fill="rgba(2,8,20,0.95)" stroke="url(#m-hex-grad)" stroke-width="2.5"/>
         <text x="40" y="49" text-anchor="middle" font-family="Share Tech Mono, monospace" font-size="18" font-weight="700" fill="url(#m-hex-grad)">&lt;/&gt;</text>
       </svg>
       <div class="modal-logo-name">DEVNOVA</div>
@@ -938,7 +973,7 @@
     <div class="modal-top-line"></div>
     <button class="modal-close" id="closeServiceModal">✕</button>
     <div class="modal-logo">
-      <span id="modalServiceIcon" style="font-size: 30px; filter: drop-shadow(0 0 10px var(--neon-blue));">🌐</span>
+      <span id="modalServiceIcon" style="font-size: 30px;">🌐</span>
       <div class="modal-logo-name" id="modalServiceHeader" style="margin-right: 10px;">DEVNOVA SERVICE</div>
     </div>
     <div class="modal-title" id="modalServiceTitle">تطوير المواقع</div>
@@ -966,12 +1001,8 @@
             <stop offset="0%" stop-color="#00d4ff"/>
             <stop offset="100%" stop-color="#a855f7"/>
           </linearGradient>
-          <filter id="n-glow">
-            <feGaussianBlur stdDeviation="2.5" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
         </defs>
-        <polygon points="40,4 72,22 72,58 40,76 8,58 8,22" fill="rgba(2,8,20,0.95)" stroke="url(#n-hex-grad)" stroke-width="2.5" filter="url(#n-glow)"/>
+        <polygon points="40,4 72,22 72,58 40,76 8,58 8,22" fill="rgba(2,8,20,0.95)" stroke="url(#n-hex-grad)" stroke-width="2.5"/>
         <text x="40" y="49" text-anchor="middle" font-family="Share Tech Mono, monospace" font-size="18" font-weight="700" fill="url(#n-hex-grad)">&lt;/&gt;</text>
       </svg>
       <div class="nav-logo-text">DEVNOVA</div>
@@ -991,41 +1022,39 @@
             <stop offset="0%" stop-color="#00d4ff"/>
             <stop offset="100%" stop-color="#a855f7"/>
           </linearGradient>
-          <filter id="h-glow">
-            <feGaussianBlur stdDeviation="3" result="blur"/>
-            <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
-          </filter>
         </defs>
-        <polygon points="60,6 108,33 108,87 60,114 12,87 12,33" fill="rgba(2,8,20,0.95)" stroke="url(#h-hex-grad)" stroke-width="3" filter="url(#h-glow)"/>
-        <text x="60" y="72" text-anchor="middle" font-family="Share Tech Mono, monospace" font-size="24" font-weight="700" fill="url(#h-hex-grad)">&lt;/&gt;</text>
+        <polygon points="60,6 108,33 108,87 60,114 12,87 12,33" fill="rgba(2,8,20,0.95)" stroke="url(#h-hex-grad)" stroke-width="3"/>
+        <text x="60" y="72" text-anchor="middle" font-family="Share Tech Mono, monospace" font-size="28" font-weight="700" fill="url(#h-hex-grad)">&lt;/&gt;</text>
       </svg>
     </div>
 
     <div class="hero-eyebrow">Full-Stack Developer</div>
     <h1 class="hero-title">
-      <span class="word-white">نصنع مـسـتـقـبـل</span><br>
+      <span class="word-white">نصنع مستقبل</span><br>
       <span class="word-grad">الويب الذكي</span>
     </h1>
-    <p class="hero-sub">تطوير مواقع وتطبيقات متكاملة بأحدث التقنيات البرمجية وأعلى معايير الأداء والأمان الفائق.</p>
-    
+    <p class="hero-sub">
+      تطوير مواقع وتطبيقات متكاملة بأحدث التقنيات البرمجية وأعلى معايير الأداء والأمان الفائق.
+    </p>
+
     <div class="hero-tags">
-      <span class="tag">UI/UX Design</span>
       <span class="tag">Full-Stack Development</span>
-      <span class="tag">Mobile Apps</span>
+      <span class="tag">UI/UX Design</span>
       <span class="tag">Cloud Architecture</span>
+      <span class="tag">Mobile Apps</span>
     </div>
 
-    <button class="cta-btn open-contact-btn">ابدأ مشروعك الآن ✦</button>
+    <button class="cta-btn" onclick="openContactModal()">ابدأ مشروعك الآن ✦</button>
   </section>
 
-  <div class="stats-strip reveal">
-    <div class="stat-item">
-      <div class="stat-num">+15</div>
-      <div class="stat-label">مشاريع مكتملة</div>
-    </div>
+  <section class="stats-strip reveal">
     <div class="stat-item">
       <div class="stat-num">100%</div>
       <div class="stat-label">رضا العملاء</div>
+    </div>
+    <div class="stat-item">
+      <div class="stat-num">+15</div>
+      <div class="stat-label">مشاريع متكاملة</div>
     </div>
     <div class="stat-item">
       <div class="stat-num">+3</div>
@@ -1035,7 +1064,7 @@
       <div class="stat-num">24/7</div>
       <div class="stat-label">دعم فني متواصل</div>
     </div>
-  </div>
+  </section>
 
   <section class="services reveal">
     <div class="section-header">
@@ -1043,38 +1072,35 @@
       <h2 class="section-title">الخدمات الاحترافية</h2>
       <div class="section-line"></div>
     </div>
-
     <div class="services-grid">
-      <div class="service-card" data-service="web">
+      <div class="service-card" onclick="openServiceDetail('web')">
         <span class="service-icon">🌐</span>
-        <h3 class="service-title">تطوير المواقع الإلكترونية</h3>
-        <p class="service-desc">بناء مواقع سريعة ومتجاوبة مع كافة الشاشات باستخدام أحدث أطر العمل العالمية.</p>
+        <h3 class="service-title">تطوير واجهات الويب</h3>
+        <p class="service-desc">بناء مواقع فائقة السرعة ومتوافقة مع السيو، بتصميم عصري ملائم لجميع الشاشات.</p>
         <div class="service-tags">
-          <span class="s-tag">Vue.js</span>
           <span class="s-tag">React</span>
           <span class="s-tag">Next.js</span>
+          <span class="s-tag">Tailwind</span>
         </div>
       </div>
-
-      <div class="service-card" data-service="app">
-        <span class="service-icon">📱</span>
-        <h3 class="service-title">تطوير تطبيقات الهواتف</h3>
-        <p class="service-desc">برمجة تطبيقات أصلية وهجينة للأندرويد والـ iOS بأداء سلس وواجهات جذابة.</p>
-        <div class="service-tags">
-          <span class="s-tag">Flutter</span>
-          <span class="s-tag">Firebase</span>
-          <span class="s-tag">REST API</span>
-        </div>
-      </div>
-
-      <div class="service-card" data-service="backend">
-        <span class="service-icon">⚡</span>
-        <h3 class="service-title">برمجة الأنظمة الخلفية</h3>
-        <p class="service-desc">تطوير خوادم وقواعد بيانات متطورة آمنة تماماً وقابلة للتوسع لتتحمل ملايين الطلبات.</p>
+      <div class="service-card" onclick="openServiceDetail('backend')">
+        <span class="service-icon">⚙️</span>
+        <h3 class="service-title">تطوير الباك إند والـ APIs</h3>
+        <p class="service-desc">تصميم قواعد بيانات آمنة وربط برمجيات معقدة بمعالجة سحابية خالية من الثغرات.</p>
         <div class="service-tags">
           <span class="s-tag">Node.js</span>
-          <span class="s-tag">Python</span>
+          <span class="s-tag">Express</span>
           <span class="s-tag">MongoDB</span>
+        </div>
+      </div>
+      <div class="service-card" onclick="openServiceDetail('mobile')">
+        <span class="service-icon">📱</span>
+        <h3 class="service-title">تطبيقات الهواتف الذكية</h3>
+        <p class="service-desc">تطوير تطبيقات هجينة تعمل بكفاءة مطلقة على أنظمة Android و iOS من كود واحد.</p>
+        <div class="service-tags">
+          <span class="s-tag">Flutter</span>
+          <span class="s-tag">Dart</span>
+          <span class="s-tag">Firebase</span>
         </div>
       </div>
     </div>
@@ -1082,38 +1108,30 @@
 
   <section class="process reveal">
     <div class="section-header">
-      <div class="section-eyebrow">WORKFLOW</div>
-      <h2 class="section-title">آلية العمل وهندسة المشاريع</h2>
+      <div class="section-eyebrow">HOW IT WORKS</div>
+      <h2 class="section-title">خطوات العمل</h2>
       <div class="section-line"></div>
     </div>
-
     <div class="process-steps">
       <div class="process-step">
         <div class="step-num">01</div>
         <div class="step-content">
-          <h3 class="step-title">التخطيط ودراسة المتطلبات</h3>
-          <p class="step-desc">جلسة استشارية لفهم فكرة المشروع وتحديد البنية التحتية البرمجية والجدول الزمني.</p>
+          <h4 class="step-title">التخطيط والاستراتيجية</h4>
+          <p class="step-desc">نبدأ بتحليل الفكرة، دراسة متطلبات السوق لتحديد خارطة الطريق التقنية الأنسب لنجاح المشروع.</p>
         </div>
       </div>
       <div class="process-step">
         <div class="step-num">02</div>
         <div class="step-content">
-          <h3 class="step-title">تصميم واجهات المستخدم (UI/UX)</h3>
-          <p class="step-desc">بناء تصاميم عصرية ونماذج أولية تفاعلية تركز على توفير أفضل تجربة للمستخدم.</p>
+          <h4 class="step-title">التصميم والبرمجة</h4>
+          <p class="step-desc">تحويل التخطيط إلى نموذج واجهات وتكويد النظام بأعلى جودة برمجية مع المتابعة المستمرة معكم.</p>
         </div>
       </div>
       <div class="process-step">
         <div class="step-num">03</div>
         <div class="step-content">
-          <h3 class="step-title">التطوير والبرمجة الفعلية</h3>
-          <p class="step-desc">تحويل التصاميم إلى أكواد نظيفة ومعيارية مع ربط الخوادم وقواعد البيانات باحترافية.</p>
-        </div>
-      </div>
-      <div class="process-step">
-        <div class="step-num">04</div>
-        <div class="step-content">
-          <h3 class="step-title">الاختبار والإطلاق الرسمي</h3>
-          <p class="step-desc">فحص الأمان، سرعة الاستجابة، وحل المشكلات قبل رفع المشروع على الاستضافة النهائية.</p>
+          <h4 class="step-title">الاختبار والإطلاق</h4>
+          <p class="step-desc">فحص الأداء، حماية البيانات وسد الثغرات ثم رفع المشروع على الخوادم السحابية بنجاح.</p>
         </div>
       </div>
     </div>
@@ -1121,202 +1139,127 @@
 
   <section class="tech reveal">
     <div class="section-header">
-      <div class="section-eyebrow">TECH STACK</div>
-      <h2 class="section-title">الترسانة التقنية</h2>
+      <div class="section-eyebrow">MY TOOLS</div>
+      <h2 class="section-title">التقنيات المستخدمة</h2>
       <div class="section-line"></div>
     </div>
-
     <div class="tech-grid">
       <div class="tech-item"><span class="tech-icon">HTML</span><span class="tech-name">HTML5</span></div>
       <div class="tech-item"><span class="tech-icon">CSS</span><span class="tech-name">CSS3</span></div>
       <div class="tech-item"><span class="tech-icon">JS</span><span class="tech-name">JavaScript</span></div>
-      <div class="tech-item"><span class="tech-icon">☢</span><span class="tech-name">React</span></div>
+      <div class="tech-item"><span class="tech-icon">⚛️</span><span class="tech-name">React</span></div>
       <div class="tech-item"><span class="tech-icon">🟢</span><span class="tech-name">Node.js</span></div>
-      <div class="tech-item"><span class="tech-icon">🐍</span><span class="tech-name">Python</span></div>
       <div class="tech-item"><span class="tech-icon">🍃</span><span class="tech-name">MongoDB</span></div>
-      <div class="tech-item"><span class="tech-icon">🐙</span><span class="tech-name">Git/GitHub</span></div>
+      <div class="tech-item"><span class="tech-icon">⚡</span><span class="tech-name">Next.js</span></div>
+      <div class="tech-item"><span class="tech-icon">🔷</span><span class="tech-name">Flutter</span></div>
     </div>
   </section>
 
   <section class="why reveal">
     <div class="section-header">
-      <div class="section-eyebrow">WHY ME</div>
-      <h2 class="section-title">لماذا تختار DevNova؟</h2>
+      <div class="section-eyebrow">BENEFITS</div>
+      <h2 class="section-title">لماذا توظفني لمشروعك؟</h2>
       <div class="section-line"></div>
     </div>
-
     <div class="why-grid">
       <div class="why-card">
         <div class="why-icon-wrap">🚀</div>
         <div>
-          <h4 class="why-text-title">سرعة فائقة بالأداء</h4>
-          <p class="why-text-desc">تطوير يعتمد على تحسين الأكواد وضغط الملفات لضمان أعلى سرعة تحميل ممكنة.</p>
+          <h4 class="why-text-title">سرعة وأداء فائق</h4>
+          <p class="why-text-desc">تأمين كود نظيف وخفيف لضمان سرعة تحميل ممتازة للموقع لزوارك.</p>
         </div>
       </div>
       <div class="why-card">
-        <div class="why-icon-wrap">🛡️</div>
+        <div class="why-icon-wrap">🔒</div>
         <div>
-          <h4 class="why-text-title">حماية وأمان فائق</h4>
-          <p class="why-text-desc">تطبيق أعلى معايير الأمان لحماية بياناتك وبيانات عملائك من أي ثغرات.</p>
-        </div>
-      </div>
-      <div class="why-card">
-        <div class="why-icon-wrap">🎨</div>
-        <div>
-          <h4 class="why-text-title">كود مخصص ونظيف</h4>
-          <p class="why-text-desc">أكواد مرتبة وموثقة بالكامل يسهل تعديلها وتطويرها مستقبلاً دون تعقيدات.</p>
+          <h4 class="why-text-title">أمان عالي</h4>
+          <p class="why-text-desc">تطبيق أفضل ممارسات الحماية لمنع الهجمات الإلكترونية وحفظ البيانات.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <div class="footer-cta reveal">
-    <h3 class="footer-cta-title">هل لديك فكرة مشروع تود مناقشتها؟</h3>
-    <p class="footer-cta-sub">دعنا نتحاور حول أهدافك البرمجية ونصمم لك الحل الرقمي الأنسب لنمو أعمالك.</p>
-    <button class="cta-btn open-contact-btn">تواصل الآن ✦</button>
-  </div>
+  <section class="footer-cta reveal">
+    <h3 class="footer-cta-title">هل لديك فكرة مشروع ترغب في تنفيذها?</h3>
+    <p class="footer-cta-sub">دعنا نتعاون سوياً لبناء تجربة رقمية استثنائية تعزز عملك وتنقله إلى آفاق جديدة.</p>
+    <button class="cta-btn" onclick="openContactModal()">تواصل معي الآن ✦</button>
+  </section>
 
   <footer>
     <div class="footer-logo">DEVNOVA</div>
-    <div>© 2026 جميع الحقوق محفوظة لـ DevNova.</div>
+    <div>جميع الحقوق محفوظة © 2026 DevNova. تم التطوير بكل شغف.</div>
   </footer>
 
 </div>
 
 <script>
-  // 1. GENERATE STARFIELD ANIMATION
-  const starfield = document.getElementById('starfield');
-  const starCount = 60;
-  const colors = ['white', 'blue', 'purple'];
-
-  for (let i = 0; i < starCount; i++) {
-    const star = document.createElement('div');
-    star.classList.add('star', colors[Math.floor(Math.random() * colors.length)]);
-    
-    // Random position and scales
-    star.style.top = Math.random() * 100 + 'vh';
-    star.style.left = Math.random() * 100 + 'vw';
-    const size = Math.random() * 2 + 1;
-    star.style.width = size + 'px';
-    star.style.height = size + 'px';
-    
-    // Random timing
-    star.style.animationDuration = (Math.random() * 4 + 3) + 's';
-    star.style.animationDelay = Math.random() * 5 + 's';
-    
-    starfield.appendChild(star);
-  }
-
-  // 2. GENERATE FLOATING PARTICLES
-  const particlesContainer = document.getElementById('particles');
-  const particleCount = 25;
-
-  for (let i = 0; i < particleCount; i++) {
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
-    
-    particle.style.left = Math.random() * 100 + 'vw';
-    const size = Math.random() * 4 + 2;
-    particle.style.width = size + 'px';
-    particle.style.height = size + 'px';
-    
-    particle.style.animationDuration = (Math.random() * 12 + 8) + 's';
-    particle.style.animationDelay = Math.random() * 8 + 's';
-    particle.style.setProperty('--drift', (Math.random() * 60 - 30) + 'px');
-    
-    particlesContainer.appendChild(particle);
-  }
-
-  // 3. MODALS LOGIC (Contact Modal)
+  // النوافذ المنبثقة
   const contactModal = document.getElementById('contactModal');
-  const closeModal = document.getElementById('closeModal');
-  const openContactBtns = document.querySelectorAll('.open-contact-btn');
-
-  openContactBtns.forEach(btn => {
-    btn.addEventListener('click', () => contactModal.classList.add('active'));
-  });
-  closeModal.addEventListener('click', () => contactModal.classList.remove('active'));
-
-  // 4. DYNAMIC SERVICES MODAL DATA
-  const serviceData = {
-    web: {
-      title: "تطوير المواقع الإلكترونية",
-      icon: "🌐",
-      desc: "نقدم حلول تطوير ويب متكاملة مخصصة لهوية أعمالك. نركز على سرعة التصفح، الأرشفة الذكية في محركات البحث (SEO)، والتوافق المطلق مع الهواتف الذكية والأجهزة اللوحية.",
-      features: ["واجهات مستخدم تفاعلية فائقة السرعة", "لوحة تحكم إدارية مخصصة وسهلة الاستخدام", "كود نظيف متوافق مع معايير الويب العالمية SEO", "دعم ميزة الأنظمة الذكية والأنماط المظلمة Dark Mode"],
-      tags: ["Vue.js", "React.js", "Next.js", "TailwindCSS", "WordPress API"]
-    },
-    app: {
-      title: "تطوير تطبيقات الهواتف",
-      icon: "📱",
-      desc: "تصميم وبرمجة تطبيقات الهواتف لنظامي Android و iOS باستخدام كود برمجي موحد ومستقر يضمن السرعة والكفاءة العالية وتقليل تكلفة التطوير.",
-      features: ["واجهات وتجربة مستخدم مذهلة وسلسة", "ربط مباشر مع الحساسات الداخلية (GPS, Camera)", "نظام إشعارات دفعي متطور للعملاء Push Notifications", "العمل دون اتصال بالإنترنت Offline Caching"],
-      tags: ["Flutter", "Dart", "Firebase", "App Store / Play Store", "SQLite"]
-    },
-    backend: {
-      title: "برمجة الأنظمة والـ APIs",
-      icon: "⚡",
-      desc: "بناء المحركات الخلفية التي تدير بيانات مشروعك بكل أمان واستقرار. نضمن لك معمارية برمجية صلبة تتحمل الضغط العالي وتدفق البيانات الضخم بمرونة تامة.",
-      features: ["بناء واجهات برمجية RESTful / GraphQL آمنة وسريعة", "حماية قواعد البيانات وتشفير كلمات المرور والبيانات الحساسة", "تكامل ذكي مع بوابات الدفع الإلكتروني (Stripe, PayPal)", "أنظمة مراقبة وتحليل أداء الخوادم الفورية"],
-      tags: ["Node.js", "Express", "Python Django", "MongoDB", "PostgreSQL", "JWT Authentication"]
-    }
-  };
-
   const serviceModal = document.getElementById('serviceModal');
-  const closeServiceModal = document.getElementById('closeServiceModal');
-  const serviceCards = document.querySelectorAll('.service-card');
 
-  serviceCards.forEach(card => {
-    card.addEventListener('click', () => {
-      const type = card.getAttribute('data-service');
-      const data = serviceData[type];
-      
-      if (data) {
-        document.getElementById('modalServiceIcon').innerText = data.icon;
-        document.getElementById('modalServiceTitle').innerText = data.title;
-        
-        let htmlContent = `<p>${data.desc}</p><ul class="service-detail-features">`;
-        data.features.forEach(f => { htmlContent += `<li>${f}</li>`; });
-        htmlContent += `</ul>`;
-        document.getElementById('modalServiceDetail').innerHTML = htmlContent;
+  function openContactModal() { contactModal.classList.add('active'); }
+  document.getElementById('closeModal').addEventListener('click', () => { contactModal.classList.remove('active'); });
 
-        let tagsContent = '';
-        data.tags.forEach(t => { tagsContent += `<span class="s-tag">${t}</span>`; });
-        document.getElementById('modalServiceTags').innerHTML = tagsContent;
+  function openServiceDetail(type) {
+    const title = document.getElementById('modalServiceTitle');
+    const desc = document.getElementById('modalServiceDetail');
+    const tags = document.getElementById('modalServiceTags');
+    const icon = document.getElementById('modalServiceIcon');
 
-        serviceModal.classList.add('active');
-      }
-    });
-  });
-
-  closeServiceModal.addEventListener('click', () => serviceModal.classList.remove('active'));
-
-  // Close modals when clicking outside the content box
-  window.addEventListener('click', (e) => {
-    if (e.target === contactModal) contactModal.classList.remove('active');
-    if (e.target === serviceModal) serviceModal.classList.remove('active');
-  });
-
+    if(type === 'web') {
+      icon.innerText = '🌐';
+      title.innerText = 'تطوير واجهات الويب';
+      desc.innerHTML = 'نقدم خدمة بناء مواقع متكاملة سريعة ومتجاوبة تماماً مع شاشات الهواتف. تشمل المميزات:<ul class="service-detail-features"><li>برمجة متوافقة مع محركات البحث SEO.</li><li>تأثيرات حركية خفيفة وعصرية.</li><li>لوحة تحكم مرنة لإدارة المحتوى بسهولة.</li></ul>';
+      tags.innerHTML = '<span class="s-tag">React</span><span class="s-tag">Next.js</span><span class="s-tag">Tailwind CSS</span>';
+    } else if(type === 'backend') {
+      icon.innerText = '⚙️';
+      title.innerText = 'تطوير الباك إند والـ APIs';
+      desc.innerHTML = 'بناء العقل المدبر لمشروعك؛ قواعد بيانات سريعة وهياكل برمجية تتحمل آلاف الزوار المتزامنين دون أي بطء أو توقف.';
+      tags.innerHTML = '<span class="s-tag">Node.js</span><span class="s-tag">Express</span><span class="s-tag">MongoDB</span><span class="s-tag">REST APIs</span>';
+    } else if(type === 'mobile') {
+      icon.innerText = '📱';
+      title.innerText = 'تطبيقات الهواتف الذكية';
+      desc.innerHTML = 'برمجة وتصميم تطبيقات ذكية وأنظمة مستقرة ترفع مباشرة على متجر Google Play ومتجر App Store بواجهات استخدام سلسة.';
+      tags.innerHTML = '<span class="s-tag">Flutter</span><span class="s-tag">Dart</span><span class="s-tag">Firebase</span>';
+    }
+    serviceModal.classList.add('active');
+  }
+  
+  document.getElementById('closeServiceModal').addEventListener('click', () => { serviceModal.classList.remove('active'); });
   document.getElementById('modalServiceCTA').addEventListener('click', () => {
     serviceModal.classList.remove('active');
-    contactModal.classList.add('active');
+    openContactModal();
   });
 
-  // 5. SCROLL REVEAL EFFECT
-  const revealElements = document.querySelectorAll('.reveal');
-  const checkReveal = () => {
-    const triggerBottom = window.innerHeight * 0.85;
-    revealElements.forEach(el => {
-      const elTop = el.getBoundingClientRect().top;
-      if (elTop < triggerBottom) {
-        el.classList.add('visible');
+  // Scroll Reveal تأثير الظهور بالتمرير
+  const reveals = document.querySelectorAll('.reveal');
+  function revealOnScroll() {
+    for (let i = 0; i < reveals.length; i++) {
+      let windowHeight = window.innerHeight;
+      let elementTop = reveals[i].getBoundingClientRect().top;
+      let elementVisible = 80;
+      if (elementTop < windowHeight - elementVisible) {
+        reveals[i].classList.add('visible');
       }
-    });
-  };
+    }
+  }
+  window.addEventListener('scroll', revealOnScroll);
+  window.addEventListener('load', revealOnScroll);
 
-  window.addEventListener('scroll', checkReveal);
-  window.addEventListener('load', checkReveal); // Run once on load
+  // توليد الجزيئات
+  const particlesContainer = document.getElementById('particles');
+  const particleCount = window.innerWidth < 480 ? 10 : 20; // تقليل العدد في الهواتف للأداء السلس
+  for (let i = 0; i < particleCount; i++) {
+    let particle = document.createElement('div');
+    particle.className = 'particle';
+    particle.style.left = Math.random() * 100 + 'vw';
+    particle.style.top = Math.random() * 100 + 'vh';
+    particle.style.width = particle.style.height = (Math.random() * 3 + 2) + 'px';
+    particle.style.animationDuration = (Math.random() * 10 + 8) + 's';
+    particle.style.animationDelay = (Math.random() * 5) + 's';
+    particle.style.setProperty('--drift', (Math.random() * 40 - 20) + 'px');
+    particlesContainer.appendChild(particle);
+  }
 </script>
-
 </body>
 </html>
